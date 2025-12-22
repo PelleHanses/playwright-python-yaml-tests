@@ -25,7 +25,7 @@ A YAML-configured Playwright test runner for Python with Prometheus metrics expo
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/playwright-python-yaml-tests.git
+git clone https://github.com/PelleHanses/playwright-python-yaml-tests
 cd playwright-python-yaml-tests
 ```
 
@@ -370,7 +370,7 @@ SOFTWARE.
 
 ## Authors
 
-- Your Name - Initial work
+- Pelle Hanses - Initial work
 
 ## Acknowledgments
 
