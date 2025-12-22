@@ -1,0 +1,29 @@
+tests:
+  - name: Meet-login-guest
+    url: "https://meet.example.se/test_auto01"
+    search_string: "Moderator och identifierade deltagare"
+    expected_redirect_url: "https://files.example.se/video/login/login.php?/test_auto01"
+
+  - name: Meet-login-2
+    url: "https://meet.example.se/test_auto01"
+    search_string: "Moderator och identifierade deltagare"
+
+  - name: Simple-test
+    url: "https://meet.example.se"
+    # Lägg till fler tester på samma sätt...
+
+  - name: More
+    url: "https://meet.example.se/test_auto01"
+    search_string: "Moderator och identifierade deltagare"
+    input_text_field:
+      selector: "#input-field"
+      value: "Some input text"
+    radio_button:
+      selector: 'input[name="radio"][value="option"]'
+    dropdown:
+      selector: "#dropdown"
+      value: "Option 2"
+    button_click:
+      selector: "#submit-button"
+    expected_redirect_url: "https://www.example.se/newpage#param=value"
+
