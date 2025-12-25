@@ -9,6 +9,7 @@ playwright install
 playwright install chromium
 playwright install firefox
 playwright install webkit
+pip install pyyaml
 pip install argparse
 
 
