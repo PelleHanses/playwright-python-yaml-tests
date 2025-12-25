@@ -1,0 +1,108 @@
+tests:
+  - name: Enterprise-Demo-Test
+    url: "https://example.com/demo"
+    steps:
+
+      # ------------------------------
+      # Step 1: Initial Page Load
+      # ------------------------------
+      - wait_for_element: "body"
+      - search_string: "Welcome to Demo"
+      - take_screenshot: "step1_page_loaded.png"
+
+      # ------------------------------
+      # Step 2: Fill input and click
+      # ------------------------------
+      - input_text_field:
+          selector: "#username"
+          value: "enterprise_user"
+      - input_text_field:
+          selector: "#password"
+          value: "SuperSecret123"
+      - keyboard_input:
+          selector: "#password"
+          text: ""
+          press_enter: true
+      - take_screenshot: "step2_login_filled.png"
+
+      # ------------------------------
+      # Step 3: Hover & Click Menu
+      # ------------------------------
+      - wait_for_element: "#menu"
+      - hover:
+          selector: "#menu"
+      - button_click:
+          selector: "#submenu-item"
+      - take_screenshot: "step3_hover_click.png"
+
+      # ------------------------------
+      # Step 4: Dropdown and Radio Selection
+      # ------------------------------
+      - dropdown:
+          selector: "#select-plan"
+          value: "Enterprise"
+      - radio_button:
+          selector: "input[name='newsletter'][value='yes']"
+      - take_screenshot: "step4_dropdown_radio.png"
+
+      # ------------------------------
+      # Step 5: File Upload
+      # ------------------------------
+      - wait_for_element: "#file-upload"
+      - upload_file:
+          selector: "#file-upload"
+          path: "/tmp/sample_file.pdf"
+      - take_screenshot: "step5_file_upload.png"
+
+      # ------------------------------
+      # Step 6: Drag and Drop
+      # ------------------------------
+      - wait_for_element: "#drag-source"
+      - wait_for_element: "#drop-target"
+      - drag_and_drop:
+          source: "#drag-source"
+          target: "#drop-target"
+      - take_screenshot: "step6_drag_drop.png"
+
+      # ------------------------------
+      # Step 7: Mobile Emulation
+      # ------------------------------
+      - emulate_device: "iPhone 13"
+      - wait_for_element: "#mobile-menu"
+      - button_click:
+          selector: "#mobile-menu"
+      - take_screenshot: "step7_mobile.png"
+
+      # ------------------------------
+      # Step 8: Cookies and Network
+      # ------------------------------
+      - set_cookie:
+          name: "session_id"
+          value: "123456"
+          domain: "example.com"
+      - block_request:
+          url_pattern: "*/ads/*"
+      - go_to: "https://example.com/dashboard"
+      - take_screenshot: "step8_network_cookies.png"
+
+      # ------------------------------
+      # Step 9: Multiple Tabs / Windows
+      # ------------------------------
+      - new_tab:
+          url: "https://example.com/help"
+      - wait_for_element: "h1"
+      - assert_element:
+          selector: "h1"
+          text: "Help Center"
+      - take_screenshot: "step9_new_tab.png"
+      - close_tab: true
+
+      # ------------------------------
+      # Step 10: Assertions and Fragment Verification
+      # ------------------------------
+      - expected_url: "https://example.com/dashboard"
+      - expected_fragment: "#overview"
+      - assert_element:
+          selector: "h2"
+          text: "Overview"
+      - take_screenshot: "step10_final.png"

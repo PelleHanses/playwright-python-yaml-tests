@@ -115,6 +115,85 @@ Assert Element	assert_element	Check element text/content
 Verify URL	expected_url	Assert URL starts with value
 Verify Redirect	expected_redirect_url	Assert redirect URL
 Verify Fragment	expected_fragment	Assert URL fragment
+
+## Enterprise examples
+### Drag and Drop
+steps:
+  - wait_for_element: "#drag-source"
+  - wait_for_element: "#drop-target"
+  - drag_and_drop:
+      source: "#drag-source"
+      target: "#drop-target"
+  - take_screenshot: "step_drag_drop.png"
+### File Upload
+steps:
+  - wait_for_element: "#file-input"
+  - upload_file:
+      selector: "#file-input"
+      path: "/path/to/file.pdf"
+  - take_screenshot: "step_file_upload.png"
+### Hover and Click
+steps:
+  - wait_for_element: "#menu"
+  - hover:
+      selector: "#menu"
+  - button_click:
+      selector: "#submenu-item"
+  - take_screenshot: "step_hover_click.png"
+### Keyboard Input
+steps:
+  - wait_for_element: "#input-field"
+  - keyboard_input:
+      selector: "#input-field"
+      text: "Hello World"
+      press_enter: true
+  - take_screenshot: "step_keyboard.png"
+### Mobile Emulation Example
+steps:
+  - emulate_device: "iPhone 13"
+  - wait_for_element: "#mobile-menu"
+  - button_click:
+      selector: "#mobile-menu"
+  - take_screenshot: "step_mobile.png"
+### Network and Cookies Example
+steps:
+  - set_cookie:
+      name: "session_id"
+      value: "123456"
+      domain: "example.com"
+  - block_request:
+      url_pattern: "*/ads/*"
+  - go_to: "https://example.com/dashboard"
+  - take_screenshot: "step_network_cookies.png"
+### Assertions on Elements
+steps:
+  - wait_for_element: "h1"
+  - assert_element:
+      selector: "h1"
+      text: "Welcome"
+
+💡 Tip: All advanced actions integrate seamlessly with existing steps like wait_for_element, search_string, and take_screenshot. This approach keeps your YAML modular, readable, and enterprise-ready without expanding main.py unnecessarily.
+
+## Example file - test_files/example.yml
+What the file shows:
+1. Page load & search text – search_string, wait_for_element
+2. Input & keyboard actions – input_text_field, keyboard_input
+3. Hover & menu clicks – hover, button_click
+4. Dropdown & radio buttons – dropdown, radio_button
+5. File upload – upload_file
+6. Drag-and-drop – drag_and_drop
+7. Mobile emulation – emulate_device
+8. Network & cookies – set_cookie, block_request, go_to
+9. Multiple tabs/windows – new_tab, close_tab
+10. Assertions & URL/fragment verification – assert_element, expected_url, expected_fragment
+11. Screenshots per step – take_screenshot
+
+💡 Usage tips:
+The file works as a master template – you can comment/remove steps that are not needed.
+Steps with wait_for_element before search_string or click make tests more stable against dynamically loaded pages.
+emulate_device changes the viewport/resolution and user agent for mobile testing.
+The browser parameter (--browser Chromium|Firefox|Safari|all) is automatically logged in Prometheus metrics.
+
 ## Output and Results
 ### Console Output
 ```
@@ -149,7 +228,6 @@ test_last_run_timestamp{name="Meet-login-guest",suite="preprod-meet",browser="Ch
 ./main.py -f ui-tests.yaml -t all --browser all --clear-metrics
 ```
 ## Project Structure
-```
 playwright-python-yaml-tests/
 ├── main.py                # Main test runner
 ├── config.yaml            # Default test config
@@ -159,7 +237,7 @@ playwright-python-yaml-tests/
 ├── requirements.txt       # Dependencies
 ├── README.md              # This file
 └── LICENSE                # MIT License
-```
+
 ## Development
 Add new actions in run_step() in main.py
 Enterprise-ready: easily extendable for hover, drag-and-drop, file upload, network, cookies, mobile emulation, etc.
