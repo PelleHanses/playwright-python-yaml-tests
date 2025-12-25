@@ -68,6 +68,26 @@ def run_step(page, step, step_number=None):
             f"Expected redirect to {step['expected_redirect_url']}, but got {current_url}"
         print(f"{step_prefix}✓ Redirect verified: {current_url}")
 
+#    if 'expected_fragment' in step:
+#        fragment = step['expected_fragment'].lstrip('#')
+#        page.wait_for_function(f"() => window.location.hash.includes('{fragment}')")
+#        current_hash = page.evaluate("() => window.location.hash")
+#        if current_hash.startswith('#'):
+#            current_hash = current_hash[1:]
+#        assert fragment in current_hash, f"Expected fragment '{fragment}' in hash, got '{current_hash}'"
+#        print(f"{step_prefix}✓ Fragment verified: {current_hash}")
+    if 'expected_fragment' in step:
+        fragment = step['expected_fragment']
+
+        # Läs hash direkt via JS (snabbare än page.url)
+        hash_value = page.evaluate("() => window.location.hash")
+
+        assert fragment in hash_value, \
+            f"Expected fragment '{fragment}' but got '{hash_value}'"
+
+        print(f"{step_prefix}✓ Fragment verified: {hash_value}")
+
+
 def run_single_test(test):
     """Kör ett enskilt test"""
     test_name = test['name']

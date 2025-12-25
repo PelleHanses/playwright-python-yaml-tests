@@ -6,6 +6,9 @@ source mytestenv/bin/activate
 
 pip install playwright
 playwright install
+playwright install chromium
+playwright install firefox
+playwright install webkit
 pip install argparse
 
 
