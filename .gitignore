@@ -2,3 +2,7 @@ venv
 mytestenv
 test_results.log
 jitsi-prod.yml
+*.prom
+*.png
+*.png
+tests.zip
