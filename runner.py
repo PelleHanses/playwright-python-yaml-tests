@@ -58,6 +58,12 @@ def run_test(test, browser_name, headless):
 
     with sync_playwright() as p:
         if browser_name.lower() == "chromium":
+            # Lägg till fake media, fil för kamera, auto-grant permissions
+            args = [
+                "--use-fake-ui-for-media-stream",
+                "--use-fake-device-for-media-stream",
+                "--use-file-for-fake-video-capture=test.y4m"  # din testfilm
+            ]
             browser = p.chromium.launch(headless=headless)
         elif browser_name.lower() == "firefox":
             browser = p.firefox.launch(headless=headless)
@@ -65,8 +71,10 @@ def run_test(test, browser_name, headless):
             browser = p.webkit.launch(headless=headless)
         else:
             browser = p.chromium.launch(headless=headless)
-
-        context = browser.new_context()
+        # Permissions för kamera och mikrofon
+        context = browser.new_context(
+            permissions=["camera", "microphone"]
+        )
         page = context.new_page()
 
         # Log URL history

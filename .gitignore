@@ -6,3 +6,4 @@ jitsi-prod.yml
 *.png
 *.png
 tests.zip
+__pycache__
