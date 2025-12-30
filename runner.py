@@ -1,28 +1,16 @@
 #!/usr/bin/env python3
 import argparse
 import yaml
-import logging
 from datetime import datetime
 from pathlib import Path
 import importlib
 import inspect
+
 from playwright.sync_api import sync_playwright
+from logger import setup_logger
 
-# --- Setup logging ---
-log_dir = Path("log")
-log_dir.mkdir(exist_ok=True)
-log_file = log_dir / f"test_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+logger = setup_logger()
 
-logging.basicConfig(
-    filename=log_file,
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-)
-console = logging.StreamHandler()
-console.setLevel(logging.INFO)
-formatter = logging.Formatter('%(asctime)s [%(levelname)s] %(message)s')
-console.setFormatter(formatter)
-logging.getLogger('').addHandler(console)
 
 # --- Metrics ---
 metrics_dir = Path("metrics")
@@ -40,14 +28,15 @@ for py_file in actions_dir.glob("*.py"):
 
 # --- Helper: log errors nicely ---
 def log_error_step(step_name, exception, current_url, url_history, expected_url=None):
-    logging.error(
+    logger.error(
         f"\n=== STEP FAILED ===\n"
         f"Step         : {step_name}\n"
         f"Exception    : {exception}\n"
         f"Expected URL : {expected_url or 'N/A'}\n"
         f"Current URL  : {current_url}\n"
-        f"URL history  :\n" + "\n".join(f"  - {u}" for u in url_history) + "\n"
-        f"=================="
+        f"URL history  :\n" +
+        "\n".join(f"  - {u}" for u in url_history) +
+        "\n=================="
     )
 
 # --- Run a single test ---
@@ -94,16 +83,16 @@ def run_test(test, browser_name, headless):
                 # Build kwargs based on action signature
                 sig = inspect.signature(action_func)
                 kwargs = {}
+
                 if "page" in sig.parameters:
                     kwargs["page"] = page
                 if "params" in sig.parameters:
                     kwargs["params"] = action_params or {}
                 if "logger" in sig.parameters:
-                    kwargs["logger"] = logging
+                    kwargs["logger"] = logger
                 if "url_history" in sig.parameters:
                     kwargs["url_history"] = url_history
 
-                # Call the action
                 action_func(**kwargs)
 
                 # Info output
@@ -123,6 +112,7 @@ def run_test(test, browser_name, headless):
 
 # --- Main ---
 def main():
+    # Create logger
     parser = argparse.ArgumentParser(description="Playwright Test Runner")
     parser.add_argument("-f", "--file", required=True, help="Yaml test file")
     parser.add_argument("-t", "--test", help="Specific test name to run")
