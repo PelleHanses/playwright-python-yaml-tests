@@ -14,38 +14,38 @@ A simple, modular test runner for browser automation built with Playwright
 - Generates Prometheus-style metrics in metrics/test_metrics.prom
 
 ## Flow Diagram
-┌───────────────┐
-│  runner.py    │
-│  (main loop)  │
-└───────┬───────┘
-        │
-        ▼
-┌───────────────┐
-│  Load YAML    │
-│  (tests/*.yaml)│
-└───────┬───────┘
-        │
-        ▼
-┌───────────────┐
-│ Iterate over  │
-│  steps        │
-└───────┬───────┘
-        │
-        ▼
-┌───────────────┐
-│ Dynamically   │
-│ load actions  │
-│ from actions/ │
-└───────┬───────┘
-        │
-        ▼
-┌───────────────┐
-│ Execute action│
-│ (fill_input,  │
-│ click_element,│
-│ wait_for_url, │
-│ select_radio, │
-│ etc.)         │
+┌───────────────┐ \
+│  runner.py    │ \
+│  (main loop)  │ \
+└───────┬───────┘ \
+        │ \
+        ▼ \
+┌───────────────┐ \
+│  Load YAML    │ \
+│  (tests/*.yaml)│ \
+└───────┬───────┘ \
+        │ \
+        ▼ \
+┌───────────────┐ \
+│ Iterate over  │ \
+│  steps        │ \
+└───────┬───────┘ \
+        │ \
+        ▼ \
+┌───────────────┐ \
+│ Dynamically   │ \
+│ load actions  │ \
+│ from actions/ │ \
+└───────┬───────┘ \
+        │ \
+        ▼ \
+┌───────────────┐ \
+│ Execute action│ \
+│ (fill_input,  │ \
+│ click_element,│ \
+│ wait_for_url, │ \
+│ select_radio, │ \
+│ etc.)         │ \
 └───────────────┘
 
 ## Installation
@@ -70,12 +70,12 @@ python3 -m playwright install
 ```
 
 ## Command-line Parameters
-Parameter	Description
-'-f, --file	         YAML file containing test cases (required)
-'-t, --test	         Specific test name to run (optional)
-'--browser	         Chromium, Firefox, Safari, or all (default: Chromium)
-'--headless	         true or false (default: false)
-'--clear-metrics	   Clears the metrics file before running
+Parameter	Description \
+'-f, --file	         YAML file containing test cases (required) \
+'-t, --test	         Specific test name to run (optional) \
+'--browser	         Chromium, Firefox, Safari, or all (default: Chromium) \
+'--headless	         true or false (default: false) \
+'--clear-metrics	   Clears the metrics file before running \
 
 ## Creating a New Action
 
@@ -155,12 +155,12 @@ This runner uses Python’s logging module with a custom console formatter to im
 
 ### Console Output (ANSI Colors)
 
-Log messages are colorized using ANSI escape codes:
+Log messages are colorized using ANSI escape codes: \
 
-Log  Level	      Color
-INFO              White
-WARNING	          Yellow
-ERROR	            Red
+Log  Level	      Color \
+INFO              White \
+WARNING	          Yellow \
+ERROR	            Red \
 
 This makes it easy to spot problems immediately when running tests interactively.
 
@@ -206,9 +206,9 @@ test_failed 0 1735503268
 test_total  1 1735503268
 ```
 ### Exported Metrics
-Metric Name	  Description
-test_passed	  Number of passed  tests
-test_failed	  Number of failed tests
+Metric Name	  Description \
+test_passed	  Number of passed  tests \
+test_failed	  Number of failed tests \
 test_total	  Total number of executed tests
 
 Each metric includes a Unix timestamp, making it compatible with Prometheus textfile collectors.
