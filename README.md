@@ -71,11 +71,11 @@ python3 -m playwright install
 
 ## Command-line Parameters
 Parameter	Description \
-'-f, --file	         YAML file containing test cases (required) \
-'-t, --test	         Specific test name to run (optional) \
-'--browser	         Chromium, Firefox, Safari, or all (default: Chromium) \
-'--headless	         true or false (default: false) \
-'--clear-metrics	   Clears the metrics file before running \
+\-f, --file	         YAML file containing test cases (required) \
+\-t, --test	         Specific test name to run (optional) \
+\--browser	         Chromium, Firefox, Safari, or all (default: Chromium) \
+\--headless	         true or false (default: false) \
+\--clear-metrics	   Clears the metrics file before running \
 
 ## Creating a New Action
 
