@@ -9,3 +9,4 @@ tests.zip
 __pycache__
 logs/*.log
 metrics/*.prom
+tests/*.yml
