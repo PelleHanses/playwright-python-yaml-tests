@@ -10,3 +10,7 @@ __pycache__
 logs/*.log
 metrics/*.prom
 tests/*.yml
+tests/*.yml
+tests/smoke/*.yml
+tests/regression/*.yml
+tests/prod/*.yml
