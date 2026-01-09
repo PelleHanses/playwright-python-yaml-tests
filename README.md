@@ -239,6 +239,29 @@ This allows:
 - Dashboards showing test stability over time
 - Alerting on failed test spikes
 
+## Test Types
+
+Our testing strategy distinguishes between three main types of tests: **Smoke**, **Regression**, and **Production (Prod) Monitoring**.
+
+### Smoke Tests
+- Quick, basic checks to ensure the system is up and running.
+- Validate critical workflows with minimal steps.
+- Run frequently during development and after deployments.
+- Failures indicate immediate issues; no further tests are executed.
+
+### Regression Tests
+- Comprehensive tests to ensure existing functionality has not been broken by new changes.
+- Cover multiple scenarios, including previously reported bugs.
+- Can modify data or perform deeper interactions.
+- Typically run in development or pre-production environments.
+- Failures indicate functional regressions that need to be fixed before release.
+
+### Production (Prod) Monitoring Tests
+- Lightweight, read-only tests that verify system availability in the live environment.
+- Focus on essential endpoints and pages without changing data.
+- Run frequently (e.g., every few minutes) to detect downtime or major issues.
+- Failures trigger alerts for the operations team but do not indicate regressions in functionality.
+
 ## Docker/Podman
 ### Buld
 If using Docker/Podman should a custom image be built. \
