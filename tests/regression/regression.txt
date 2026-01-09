@@ -1,0 +1,1 @@
+Regression tests - tests all features and functions, even all bugs discovered earlier

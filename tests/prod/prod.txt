@@ -1,0 +1,1 @@
+Prod tests - simplier tests running in prod environment to check that the environment is up

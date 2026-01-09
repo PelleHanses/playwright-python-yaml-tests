@@ -1,0 +1,1 @@
+Smoke tests - simple and fast for test if environment is up
