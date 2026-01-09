@@ -7,3 +7,5 @@ jitsi-prod.yml
 *.png
 tests.zip
 __pycache__
+logs/*.log
+metric/*.prom

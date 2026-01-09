@@ -1,0 +1,29 @@
+services:
+  guest:
+    image: playwright_python:fk
+    working_dir: /work
+    volumes:
+      - ./logs:/work/logs:Z
+      - ./metrics:/work/promfiles:Z
+      - ./tests:/work/tests:Z
+    shm_size: "1gb"
+    environment:
+      - PYTHONUNBUFFERED=1
+    command:
+      - "--file"
+      - "/work/tests/meet_login_guest.yaml"
+      - "--headless"
+      - "true"
+
+  info:
+    image: playwright_python:fk
+    working_dir: /work
+    volumes:
+      - ./logs:/work/logs:Z
+      - ./metrics:/work/promfiles:Z
+      - ./tests:/work/tests:Z
+    shm_size: "1gb"
+    environment:
+      - PYTHONUNBUFFERED=1
+    command:
+      - "--help"

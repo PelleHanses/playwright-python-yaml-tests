@@ -239,7 +239,22 @@ This allows:
 - Dashboards showing test stability over time
 - Alerting on failed test spikes
 
-
+## Docker/Podman
+### Buld
+If using Docker/Podman should a custom image be built. \
+Build a new image from Python slim:
+```
+docker build -f Dockerfile -t playwright_python:1.0.0 .
+```
+or
+```
+podman build -f Dockerfile -t playwright_python:1.0.0 .
+```
+### Run tests
+To use the test with Docker/Podman start with
+```
+docker compose run test1 --rm
+```
 
 ## License
 MIT License © Pelle Hanses
