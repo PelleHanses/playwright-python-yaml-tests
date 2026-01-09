@@ -8,4 +8,4 @@ jitsi-prod.yml
 tests.zip
 __pycache__
 logs/*.log
-metric/*.prom
+metrics/*.prom
