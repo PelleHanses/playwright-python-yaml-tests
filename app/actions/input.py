@@ -18,23 +18,6 @@ def fill_input(page, params, logger=None, url_history=None):
     except TimeoutError:
         raise AssertionError(f"Input field not found or not visible: {selector}")
 
-def click_element(page, params, logger=None, url_history=None):
-    selector = params.get("selector")
-    timeout = params.get("timeout", 10000)
-
-    if not selector:
-        raise ValueError("Parameter 'selector' saknas för click_element")
-
-    if logger:
-        logger.info(f"Click element: {selector}")
-
-    try:
-        locator = page.locator(selector)
-        locator.wait_for(state="visible", timeout=timeout)
-        locator.click()
-    except TimeoutError:
-        raise AssertionError(f"Element not clickable: {selector}")
-
 def select_radio(page, params, logger=None, url_history=None):
     selector = params.get("selector")
     timeout = params.get("timeout", 10000)
