@@ -267,11 +267,11 @@ Our testing strategy distinguishes between three main types of tests: **Smoke**,
 If using Docker/Podman should a custom image be built. \
 Build a new image from Python slim:
 ```
-docker build -f Dockerfile -t playwright_python:1.0.0 .
+docker build -f Dockerfile -t playwright_python:ppyt-1.0.0 .
 ```
 or
 ```
-podman build -f Dockerfile -t playwright_python:1.0.0 .
+podman build -f Dockerfile -t playwright_python:ppyt-1.0.0 .
 ```
 ### Run tests
 To use the test with Docker/Podman start with
