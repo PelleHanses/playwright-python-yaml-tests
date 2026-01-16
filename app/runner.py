@@ -15,7 +15,7 @@ logger = setup_logger()
 # --- Dynamically load all actions from actions/ ---
 actions = {}
 actions_dir = Path("actions")
-for py_file in actions_dir.glob("*.py"):
+for py_file in sorted(actions_dir.glob("*.py")):
     module_name = py_file.stem
     module = importlib.import_module(f"actions.{module_name}")
     for name, func in inspect.getmembers(module, inspect.isfunction):
