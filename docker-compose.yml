@@ -1,6 +1,6 @@
 services:
   guest:
-    image: playwright_python:fk
+    image: playwright_python:ppyt-1.0.0
     working_dir: /work
     volumes:
       - ./logs:/work/logs:Z
@@ -15,8 +15,8 @@ services:
       - "--headless"
       - "true"
 
-  info:
-    image: playwright_python:fk
+  help:
+    image: playwright_python:ppyt-1.0.0
     working_dir: /work
     volumes:
       - ./logs:/work/logs:Z
