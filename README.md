@@ -276,7 +276,7 @@ podman build -f Dockerfile -t playwright_python:1.0.0 .
 ### Run tests
 To use the test with Docker/Podman start with
 ```
-docker compose run test1 --rm
+docker compose run --rm test1
 ```
 
 ## License
